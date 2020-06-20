@@ -1,22 +1,22 @@
 <template>
   <div class="content">
     <div class="articles" v-for="(article, index) in $store.state.articles" :key="index">
-      <div v-if="article.type === 'article'">
-        <img class="image" :src="article.img" :alt="article.img" />
+      <div v-if="article.articleType === 'article'">
+        <img class="image" :src="article.articleImage" :alt="article.articleImage">
         <div class="text-content">
-          <router-link class="header-link" :to="article._id">{{ article.header }}</router-link>
-          <p class="ingress">{{ article.ingress }}</p>
-          <p class="body">{{ article.body }}</p>
+          <router-link class="header-link" :to="article.articleId">{{ article.articleHeader }}</router-link>
+          <p class="ingress">{{ article.articleIngress }}</p>
+          <p class="body">{{ article.articleBody }}</p>
         </div>
       </div>
       <div v-else>
-        <h2>{{ article.header }}</h2>
-        <iframe class="video" :src="article.video"></iframe>
+        <h2>{{ article.articleHeader }}</h2>
+        <iframe class="video" :src="article.articleVideo"></iframe>
       </div>
       <div class="meta">
-        <div class="author">{{ article.author }}</div>
+        <div class="author">{{ article.articleAuthor }}</div>
         <div class="spacer"></div>
-        <div class="date">{{ article.date }}</div>
+        <div class="date">{{ article.articleDate }}</div>
       </div>
     </div>
   </div>
@@ -31,7 +31,7 @@ export default {
   methods: {
     fetchData() {
       console.log("fetching data...");
-      fetch("http://116.203.125.0:3000/articles/")
+      fetch("http://localhost:5000/artiklar/")
         .then(response => response.json())
         .then(result => {
           this.$store.state.articles = result;
