@@ -1,0 +1,51 @@
+module.exports = function(app, database) {
+
+    const nodemailer = require('nodemailer')
+    const secret = require('./secret.js')
+    
+    app.get('/artiklar', (request, response) => {
+
+        database.all('SELECT * FROM articles')
+            .then((articles) => {
+                response.send(articles)
+            })
+    })
+    
+    app.get('/artiklar/:artikel', (request, response) => {
+    
+        database.all('SELECT * FROM articles WHERE articleId=?', [request.params.artikel])
+            .then((articles) => {
+                response.send(articles[0])
+            })
+    })
+
+    app.post('/kontakta', (request, response) => {
+        contactUs(request.body.subject, request.body.mail, request.body.body, response)
+    })
+
+    function contactUs(subject, mailAddress, body, response) {
+        const transporter = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 465,
+            secure: true,
+            auth: {
+                user: secret().mail,
+                pass: secret().pw
+            }
+        })
+        const mailOptions = {
+            from: secret().mail,
+            to: [secret().mail],
+            subject: subject,
+            text: mailAddress + '\n\n' + body 
+        }
+    
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                response.send(JSON.stringify({ message: 'There was an error sending the message', status: 2 }))
+            } else {
+                response.send(JSON.stringify({ message: 'Message sent', status: 1 }))
+            }
+        })
+    }
+}

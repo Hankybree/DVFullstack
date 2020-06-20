@@ -1,23 +1,8 @@
 module.exports = function(app, database) {
 
     const moment = require('moment')
-    
-    app.get('/artiklar', (request, response) => {
+    const { v4: uuidv4 } = require('uuid')
 
-        database.all('SELECT * FROM articles')
-            .then((articles) => {
-                response.send(articles)
-            })
-    })
-    
-    app.get('/artiklar/:artikel', (request, response) => {
-    
-        database.all('SELECT * FROM articles WHERE articleId=?', [request.params.artikel])
-            .then((articles) => {
-                response.send(articles[0])
-            })
-    })
-    
     app.post('/artiklar', (request, response) => {
     
         let videoUrl = 'https://www.youtube.com/embed/' + request.body.articleVideo
@@ -38,4 +23,24 @@ module.exports = function(app, database) {
             response.send(error)
         })
     })
+
+    function authenticate(token) {
+        return new Promise((resolve, reject) => {
+            if (token) {
+    
+                database.all('SELECT * FROM sessions WHERE sessionToken=?', [token])
+                    .then((sessions) => {
+                        if (!sessions[0]) {
+                            resolve(-1)
+                        } else {
+                            resolve(sessions[0].sessionUserId)
+                        }
+                    })
+    
+            } else {
+    
+                resolve(-1)
+            }
+        })
+    }
 }

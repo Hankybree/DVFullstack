@@ -77,6 +77,8 @@ export default {
 }
 .divider {
   border-top: solid 1px #2c3e50;
+  width: 58vw;
+  margin: auto;
 }
 @media (orientation: portrait) {
   .video,
@@ -91,6 +93,9 @@ export default {
   .articles {
     margin: auto;
     border: none;
+  }
+  .divider {
+    width: 88vw;
   }
 }
 </style>
