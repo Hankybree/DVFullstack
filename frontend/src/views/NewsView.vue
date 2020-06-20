@@ -1,8 +1,12 @@
 <template>
   <div class="content">
+    <br>
     <div class="articles" v-for="(article, index) in $store.state.articles" :key="index">
       <div v-if="article.articleType === 'article'">
-        <img class="image" :src="article.articleImage" :alt="article.articleImage">
+        <div>
+          <!-- <img class="image" :src="article.articleImage" :alt="article.articleImage"> -->
+          <img class="image" src="../assets/images/logo.png" :alt="article.articleImage">
+        </div>
         <div class="text-content">
           <router-link
             class="header-link"
@@ -17,24 +21,27 @@
             class="header-link"
             :to="article.articleId.toString()"
           >{{ article.articleHeader }}</router-link>
-        <iframe class="video" :src="article.articleVideo"></iframe>
+        <div>
+          <iframe class="video" :src="article.articleVideo"></iframe>
+        </div>
       </div>
       <div class="meta">
         <div class="author">{{ article.articleAuthor }}</div>
         <div class="spacer"></div>
         <div class="date">{{ article.articleDate }}</div>
       </div>
+      <div class="divider" v-if="index !== $store.state.articles.length - 1"></div>
     </div>
+    <br>
   </div>
 </template>
 
 <script>
 export default {
   created() {
-    this.$store.dispatch("fetchData")
+    this.$store.dispatch('fetchArticles')
   },
-  name: "NewsView",
-  methods: {}
+  name: 'NewsView'
 }
 </script>
 
@@ -46,10 +53,12 @@ export default {
 .articles {
   border-left: solid 1px #2c3e50;
   border-right: solid 1px #2c3e50;
-  border-bottom: solid 1px #2c3e50;
   display: inline-block;
-  width: 100%;
+  width: 60vw;
   margin: auto;
+}
+.text-content {
+  width: 50vw;
 }
 .header-link {
   color: #2c3e50;
@@ -59,36 +68,29 @@ export default {
 }
 .image {
   margin-bottom: 15px;
+  width: 30vw;
 }
 .video {
-  width: 98vw;
+  width: 50vw;
   height: 50vh;
+  margin: 20px;
 }
-.meta {
-  width: 98vw;
+.divider {
+  border-top: solid 1px #2c3e50;
 }
-/* @media (orientation: landscape) {
-  .articles,
-  .meta {
-    width: 52vw;
-  }
-  .image,
+@media (orientation: portrait) {
   .video,
+  .articles,
+  .image {
+    width: 90vw;
+    margin: 0;
+  }
   .text-content {
-    width: 50vw;
+    width: 85vw;
+  }
+  .articles {
+    margin: auto;
+    border: none;
   }
 }
-@media (orientation: landscape) and (min-width: 700px) {
-  .articles {
-    width: 700px;
-  }
-  .meta {
-    width: 670px;
-  }
-  .image,
-  .video, 
-  .text-content {
-    width: 640px;
-  }
-} */
 </style>

@@ -37,9 +37,17 @@ sqlite
 
 app.get('/artiklar', (request, response) => {
 
-    database.all('SELECT * FROM artiklar')
+    database.all('SELECT * FROM articles')
         .then((articles) => {
             response.send(articles)
+        })
+})
+
+app.get('/artiklar/:artikel', (request, response) => {
+
+    database.all('SELECT * FROM articles WHERE articleId=?', [request.params.artikel])
+        .then((articles) => {
+            response.send(articles[0])
         })
 })
 
@@ -47,7 +55,7 @@ app.post('/artiklar', (request, response) => {
 
     let videoUrl = 'https://www.youtube.com/embed/' + request.body.articleVideo
 
-    database.run('INSERT INTO artiklar (articleType, articleImage, articleVideo, articleHeader, articleIngress, articleBody, articleAuthor, articleDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 
+    database.run('INSERT INTO articles (articleType, articleImage, articleVideo, articleHeader, articleIngress, articleBody, articleAuthor, articleDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 
     [
         request.body.articleType,
         request.body.articleImage,

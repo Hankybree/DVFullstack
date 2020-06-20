@@ -32,6 +32,9 @@ const store = new Vuex.Store({
     article: null
   },
   mutations: {
+    setArticles(state, newArticles) {
+      state.articles = newArticles
+    },
     setArticle(state, newArticle) {
       state.article = newArticle
     }

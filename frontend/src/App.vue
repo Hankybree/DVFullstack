@@ -19,11 +19,15 @@ export default {
 </script>
 
 <style>
+/* * {
+  border: solid 1px red;
+} */
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  max-width: 100vw;
 }
 body, html {
   margin: 0;
@@ -71,6 +75,7 @@ header > img {
 .text-content {
   display: inline-block;
   text-align: left;
+  padding: 2.5vw;
 }
 .ingress {
   font-weight: bold;
