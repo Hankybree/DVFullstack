@@ -2,23 +2,27 @@ import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'
-// import VueYouTubeEmbed from 'vue-youtube-embed'
 
-import Nyheter from './views/Nyheter.vue'
-import Om from './views/Om.vue'
-import Kontakt from './views/Kontakt.vue'
-import Artikel from './views/Artikel.vue'
+// Views
+
+import NewsView from './views/NewsView.vue'
+import AboutView from './views/AboutView.vue'
+import ContactView from './views/ContactView.vue'
+import ArticleView from './views/ArticleView.vue'
+
+// Scripts
+
+import { actions } from './scripts/actions.js'
 
 Vue.use(VueRouter)
 Vue.use(Vuex)
-// Vue.use(VueYouTubeEmbed)
 
 const router = new VueRouter({
   routes: [
-    { component: Nyheter, path: '/'},
-    { component: Om, path: '/om'},
-    { component: Kontakt, path: '/kontakt'},
-    { component: Artikel, path: '/:artikel'}
+    { component: NewsView, path: '/'},
+    { component: AboutView, path: '/om'},
+    { component: ContactView, path: '/kontakt'},
+    { component: ArticleView, path: '/:artikel'}
   ]
 })
 
@@ -26,7 +30,8 @@ const store = new Vuex.Store({
   state: {
     articles: [],
     article: null
-  }
+  },
+  actions: actions
 })
 
 Vue.config.productionTip = false

@@ -1,10 +1,10 @@
 <template>
-  <div id="content"></div>
+  <div class="content"></div>
 </template>
 
 <script>
 export default {
-  name: 'Kontakt'
+  name: 'ContactView'
 }
 </script>
 

@@ -25,17 +25,14 @@
 
 <script>
 export default {
-  name: 'Om'
+  name: 'AboutView'
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 p {
   display: inline-block;
   width: 50vw;
   text-align: center;
 }
-
 </style>

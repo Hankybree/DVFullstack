@@ -4,7 +4,7 @@
       <div v-if="article.articleType === 'article'">
         <img class="image" :src="article.articleImage" :alt="article.articleImage">
         <div class="text-content">
-          <router-link class="header-link" :to="article.articleId">{{ article.articleHeader }}</router-link>
+          <router-link class="header-link" :to="article.articleId.toString()">{{ article.articleHeader }}</router-link>
           <p class="ingress">{{ article.articleIngress }}</p>
           <p class="body">{{ article.articleBody }}</p>
         </div>
@@ -25,24 +25,14 @@
 <script>
 export default {
   created() {
-    this.fetchData()
+    this.$store.dispatch('fetchData')
   },
-  name: "Nyheter",
+  name: 'NewsView',
   methods: {
-    fetchData() {
-      console.log("fetching data...");
-      fetch("http://localhost:5000/artiklar/")
-        .then(response => response.json())
-        .then(result => {
-          this.$store.state.articles = result;
-          console.log("Fetch done");
-        });
-    }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .articles {
   border-left: solid 1px #2c3e50;

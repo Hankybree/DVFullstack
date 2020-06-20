@@ -28,11 +28,10 @@ export default {
       }
     }
   },
-  name: "Artikel"
+  name: 'ArticleView'
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .meta {
   width: 82.5vw;
