@@ -2,7 +2,7 @@
   <div class="content">
     <div class="articles" v-for="(article, index) in $store.state.articles" :key="index">
       <div v-if="article.type === 'article'">
-        <img class="image" :src="article.img" :alt="article.img">
+        <img class="image" :src="article.img" :alt="article.img" />
         <div class="text-content">
           <router-link class="header-link" :to="article._id">{{ article.header }}</router-link>
           <p class="ingress">{{ article.ingress }}</p>
@@ -11,7 +11,7 @@
       </div>
       <div v-else>
         <h2>{{ article.header }}</h2>
-        <youtube :video-id="article.videoId" :player-width="youtubeWidth" :playerHeight="youtubeHeight"></youtube>
+        <iframe class="video" :src="article.video"></iframe>
       </div>
       <div class="meta">
         <div class="author">{{ article.author }}</div>
@@ -24,25 +24,7 @@
 
 <script>
 export default {
-  name: 'Nyheter',
-  computed: {
-    youtubeWidth: {
-      get() {
-        if(screen.width >= 700) {
-          return 640
-        }
-        return 240
-      }
-    },
-    youtubeHeight: {
-      get() {
-        if(screen.width >= 700) {
-          return 360
-        }
-        return 135
-      }
-    }
-  }
+  name: "Nyheter"
 }
 </script>
 
@@ -64,11 +46,19 @@ export default {
 .image {
   margin-bottom: 15px;
 }
+.video {
+  border: none;
+  width: 98vw;
+  height: 30vh;
+
+}
 @media (orientation: landscape) {
   .articles {
     width: 52vw;
   }
-  .image, .text-content {
+  .image,
+  .video,
+  .text-content {
     width: 50vw;
   }
 }
@@ -76,7 +66,9 @@ export default {
   .articles {
     width: 700px;
   }
-  .image, .text-content {
+  .image,
+  .video
+  .text-content {
     width: 640px;
   }
 }
