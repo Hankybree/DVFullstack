@@ -52,7 +52,7 @@ const authenticate = function (token) {
         }
     })
 }
-const sendConfirmation = function(mailAddress) {
+const contactUs = function(subject, mailAddress, body, response) {
     const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         port: 465,
@@ -63,17 +63,17 @@ const sendConfirmation = function(mailAddress) {
         }
     })
     const mailOptions = {
-        from: mail,
-        to: [mailAddress],
-        subject: 'Welcome to TipTop!',
-        text: 'Hello! This is a confirmation e-mail :)'
+        from: secret().mail,
+        to: [secret().mail],
+        subject: subject,
+        text: mailAddress + '\n\n' + body 
     }
 
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
-            response.send(error);
+            response.send(JSON.stringify({ message: 'There was an error sending the message', status: 2 }))
         } else {
-            response.send('Email sent: ' + info.response)
+            response.send(JSON.stringify({ message: 'Message sent', status: 1 }))
         }
     })
 }
@@ -87,3 +87,7 @@ sqlite
 
         articles(app, database)
     })
+
+app.post('/contactus', (request, response) => {
+    contactUs(request.body.subject, request.body.mail, request.body.body, response)
+})
