@@ -30,6 +30,9 @@ export default {
 </script>
 
 <style scoped>
+.content {
+  padding-top: 20px;
+}
 p {
   display: inline-block;
   width: 50vw;

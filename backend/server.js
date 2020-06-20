@@ -88,6 +88,6 @@ sqlite
         articles(app, database)
     })
 
-app.post('/contactus', (request, response) => {
+app.post('/kontakta', (request, response) => {
     contactUs(request.body.subject, request.body.mail, request.body.body, response)
 })
