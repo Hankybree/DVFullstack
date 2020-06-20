@@ -4,13 +4,19 @@
       <div v-if="article.articleType === 'article'">
         <img class="image" :src="article.articleImage" :alt="article.articleImage">
         <div class="text-content">
-          <router-link class="header-link" :to="article.articleId.toString()">{{ article.articleHeader }}</router-link>
+          <router-link
+            class="header-link"
+            :to="article.articleId.toString()"
+          >{{ article.articleHeader }}</router-link>
           <p class="ingress">{{ article.articleIngress }}</p>
           <p class="body">{{ article.articleBody }}</p>
         </div>
       </div>
       <div v-else>
-        <h2>{{ article.articleHeader }}</h2>
+        <router-link
+            class="header-link"
+            :to="article.articleId.toString()"
+          >{{ article.articleHeader }}</router-link>
         <iframe class="video" :src="article.articleVideo"></iframe>
       </div>
       <div class="meta">
@@ -25,21 +31,25 @@
 <script>
 export default {
   created() {
-    this.$store.dispatch('fetchData')
+    this.$store.dispatch("fetchData")
   },
-  name: 'NewsView',
-  methods: {
-  }
+  name: "NewsView",
+  methods: {}
 }
 </script>
 
 <style scoped>
+.content {
+  display: flex;
+  flex-direction: column;
+}
 .articles {
   border-left: solid 1px #2c3e50;
   border-right: solid 1px #2c3e50;
   border-bottom: solid 1px #2c3e50;
   display: inline-block;
   width: 100%;
+  margin: auto;
 }
 .header-link {
   color: #2c3e50;
@@ -51,13 +61,15 @@ export default {
   margin-bottom: 15px;
 }
 .video {
-  border: none;
   width: 98vw;
-  height: 30vh;
-
+  height: 50vh;
 }
-@media (orientation: landscape) {
-  .articles {
+.meta {
+  width: 98vw;
+}
+/* @media (orientation: landscape) {
+  .articles,
+  .meta {
     width: 52vw;
   }
   .image,
@@ -70,10 +82,13 @@ export default {
   .articles {
     width: 700px;
   }
+  .meta {
+    width: 670px;
+  }
   .image,
-  .video
+  .video, 
   .text-content {
     width: 640px;
   }
-}
+} */
 </style>

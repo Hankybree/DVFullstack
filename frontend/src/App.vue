@@ -65,6 +65,9 @@ header > img {
 .image, .text-content {
   width: 80vw;
 }
+.video {
+  border: none;
+}
 .text-content {
   display: inline-block;
   text-align: left;
@@ -76,6 +79,7 @@ header > img {
   display: flex;
   font-size: 12px;
   margin-bottom: 6px;
+  margin: auto;
 }
 .spacer {
   flex-grow: 1;
