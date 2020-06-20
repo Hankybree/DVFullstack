@@ -14,22 +14,8 @@
 
 <script>
 export default {
-  created() {
-    // this.fetchData()
-  },
-  name: "App",
-  methods: {
-    // fetchData() {
-    //   console.log("fetching data...");
-    //   fetch("http://116.203.125.0:3000/articles/")
-    //     .then(response => response.json())
-    //     .then(result => {
-    //       this.$store.state.articles = result;
-    //       console.log("Fetch done");
-    //     });
-    // }
-  }
-};
+  name: "App"
+}
 </script>
 
 <style>

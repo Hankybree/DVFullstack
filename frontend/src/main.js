@@ -4,10 +4,10 @@ import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 // import VueYouTubeEmbed from 'vue-youtube-embed'
 
-import Nyheter from './components/Nyheter.vue'
-import Om from './components/Om.vue'
-import Kontakt from './components/Kontakt.vue'
-import Artikel from './components/Artikel.vue'
+import Nyheter from './views/Nyheter.vue'
+import Om from './views/Om.vue'
+import Kontakt from './views/Kontakt.vue'
+import Artikel from './views/Artikel.vue'
 
 Vue.use(VueRouter)
 Vue.use(Vuex)

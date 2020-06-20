@@ -24,7 +24,21 @@
 
 <script>
 export default {
-  name: "Nyheter"
+  created() {
+    this.fetchData()
+  },
+  name: "Nyheter",
+  methods: {
+    fetchData() {
+      console.log("fetching data...");
+      fetch("http://116.203.125.0:3000/articles/")
+        .then(response => response.json())
+        .then(result => {
+          this.$store.state.articles = result;
+          console.log("Fetch done");
+        });
+    }
+  }
 }
 </script>
 
