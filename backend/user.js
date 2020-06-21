@@ -2,6 +2,11 @@ module.exports = function(app, database) {
 
     const nodemailer = require('nodemailer')
     const secret = require('./secret.js')
+
+    const limiter = require('./limiter.js')
+
+    app.use('/artiklar', limiter().articleLimiter, limiter().articleSlower)
+    app.use('/kontakta', limiter().mailLimiter, limiter().mailSlower)
     
     app.get('/artiklar', (request, response) => {
 
