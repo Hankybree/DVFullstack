@@ -24,6 +24,10 @@ module.exports = function(app, database) {
         })
     })
 
+    app.post('/login', (request, response) => {
+        
+    })
+
     function authenticate(token) {
         return new Promise((resolve, reject) => {
             if (token) {

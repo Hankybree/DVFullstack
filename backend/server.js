@@ -1,8 +1,10 @@
 // Used for handling server and http-requests
 
 const express = require('express')
-const cors = require('cors')
 const app = express()
+const cors = require('cors')
+const helmet = require('helmet')
+
 const user = require('./user.js')
 const admin = require('./admin.js')
 
@@ -19,6 +21,7 @@ const fs = require('fs')
 
 app.use(express.json())
 app.use(cors())
+app.use(helmet())
 app.use('/uploads', express.static('uploads'))
 
 app.listen(5000, () => {

@@ -9,7 +9,7 @@ module.exports = function(app, database) {
     app.use('/kontakta', limiter().mailLimiter, limiter().mailSlower)
     
     app.get('/artiklar', (request, response) => {
-
+        
         database.all('SELECT * FROM articles')
             .then((articles) => {
                 response.send(articles)
