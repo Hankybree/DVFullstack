@@ -47,9 +47,9 @@ module.exports = function(app, database) {
     
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
-                response.send(JSON.stringify({ message: 'There was an error sending the message', status: 2 }))
+                response.send(JSON.stringify({ message: 'Fel uppstod. Meddelande är ej skickat', status: 2 }))
             } else {
-                response.send(JSON.stringify({ message: 'Message sent', status: 1 }))
+                response.send(JSON.stringify({ message: 'Meddelande skickat', status: 1 }))
             }
         })
     }

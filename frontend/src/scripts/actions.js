@@ -33,11 +33,16 @@ export const actions = {
   },
   sendMail() {
 
-    fetch('http://localhost:5000/kontakta', {
+    const subject = document.querySelector('#mail-subject')
+    const mail = document.querySelector('#mail-mail')
+    const body = document.querySelector('#mail-body')
+
+    if (subject.checkValidity() && mail.checkValidity() && body.checkValidity()) {
+      fetch('http://localhost:5000/kontakta', {
       body: JSON.stringify({
-        subject: document.querySelector('#mail-subject').value,
-        mail: document.querySelector('#mail-mail').value,
-        body: document.querySelector('#mail-body').value
+        subject: subject.value,
+        mail: mail.value,
+        body: body.value
       }),
       headers: {
         'Content-Type': 'application/json'
@@ -52,5 +57,8 @@ export const actions = {
 
         alert(result.message)
       })
+    } else {
+      alert('Fyll i alla fält')
+    }
   }
 }

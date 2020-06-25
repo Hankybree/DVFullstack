@@ -6,7 +6,7 @@
       <input id="mail-subject" type="text" placeholder="Ämne..." required>
       <input id="mail-mail" type="email" placeholder="E-post..." required>
       <textarea id="mail-body" placeholder="Meddelande..." cols="30" rows="10" required></textarea>
-      <input type="submit" value="Skicka" @click="$store.dispatch('sendMail')">
+      <input type="submit" value="Skicka" @click.prevent="$store.dispatch('sendMail')">
     </form>
   </div>
 </template>
