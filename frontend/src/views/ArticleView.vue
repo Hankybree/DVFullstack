@@ -30,6 +30,9 @@ export default {
   beforeCreate() {
     this.$store.dispatch('fetchSingleArticle', this.$route.params.artikel)
   },
+  mounted() {
+    window.FB.XFBML.parse()
+  },
   name: 'ArticleView'
 }
 </script>
