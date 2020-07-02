@@ -27,6 +27,7 @@ export const actions = {
           alert(result.message)
         } else {
           context.commit('setArticle', result)
+          context.commit('setCommentUrl', 'http://localhost:8080/#/' + id)
           console.log('Fetch done!')
         }
       })

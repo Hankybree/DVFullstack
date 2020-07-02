@@ -19,6 +19,9 @@
         <div class="date">{{ $store.state.article.articleDate }}</div>
       </div>
     </div>
+    <div class="comments">
+      <div class="fb-comments" :data-href="$store.state.commentUrl" data-numposts="5" data-width=""></div>
+    </div>
   </div>
 </template>
 
@@ -27,7 +30,7 @@ export default {
   beforeCreate() {
     this.$store.dispatch('fetchSingleArticle', this.$route.params.artikel)
   },
-  name: "ArticleView"
+  name: 'ArticleView'
 }
 </script>
 
@@ -43,40 +46,26 @@ export default {
   width: 50vw;
   height: 50vh;
 }
+.comments {
+  background-color: white;
+  padding: 20px;
+  width: calc(50vw - 20px);
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: solid 0.5px rgba(0, 0, 0, 0.322);
+  border-radius: 1em;
+}
 @media (orientation: portrait) {
   #article {
     width: 95vw;
   }
-  .text-content {
-    width: 90vw;
-  }
+  .text-content,
   .video {
     width: 90vw;
   }
-}
-/* #article {
-  width: 50vw;
-  margin: auto;
-}
-.content {
-  display: flex;
-  flex-direction: column;
-}
-.meta {
-  width: 45vw;
-  display: inline-flex;
-}
-@media (orientation: portrait) {
-  #article {
-    width: 90vw;
-    padding: 20px;
+  .comments {
+    width: calc(90vw - 20px);
   }
-  .text-content {
-    width: 85vw;
-    text-align: left;
-  }
-  .meta {
-    width: 85vw;
-  }
-} */
+}
 </style>
