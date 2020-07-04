@@ -19,21 +19,28 @@
         <div class="date">{{ $store.state.article.articleDate }}</div>
       </div>
     </div>
-    <div class="comments">
-      <div class="fb-comments" :data-href="$store.state.commentUrl" data-numposts="5" data-width=""></div>
-    </div>
+    <div class="comments"></div>
   </div>
 </template>
 
 <script>
 export default {
   beforeCreate() {
-    this.$store.dispatch('fetchSingleArticle', this.$route.params.artikel)
+    this.$store.dispatch("fetchSingleArticle", this.$route.params.artikel);
   },
   mounted() {
-    window.FB.XFBML.parse()
+    this.$nextTick(() => {
+      let commentBox = document.createElement("div")
+      commentBox.setAttribute("class", "fb-comments")
+      commentBox.setAttribute("data-href", window.location.href)
+      commentBox.setAttribute("data-numposts", 5)
+      commentBox.setAttribute("data-width", "")
+      document.querySelector(".comments").appendChild(commentBox)
+
+      window.FB.XFBML.parse()
+    })
   },
-  name: 'ArticleView'
+  name: "ArticleView"
 }
 </script>
 

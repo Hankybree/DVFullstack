@@ -29,8 +29,7 @@ const router = new VueRouter({
 const store = new Vuex.Store({
   state: {
     articles: [],
-    article: null,
-    commentUrl: ''
+    article: null
   },
   mutations: {
     setArticles(state, newArticles) {
@@ -38,9 +37,6 @@ const store = new Vuex.Store({
     },
     setArticle(state, newArticle) {
       state.article = newArticle
-    },
-    setCommentUrl(state, newCommentUrl) {
-      state.commentUrl = newCommentUrl
     }
   },
   actions: actions
