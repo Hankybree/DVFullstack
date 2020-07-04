@@ -1,6 +1,6 @@
 <template>
-  <div class="content" v-if="$store.state.article !== null">
-    <div id="article">
+  <div class="content">
+    <div id="article" v-if="$store.state.article !== null">
       <div v-if="$store.state.article.articleType === 'article'">
         <img class="image" :src="$store.state.article.img" :alt="$store.state.article.articleImage" />
         <h1>{{ $store.state.article.articleHeader }}</h1>
@@ -30,17 +30,23 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      let commentBox = document.createElement("div")
-      commentBox.setAttribute("class", "fb-comments")
-      commentBox.setAttribute("data-href", window.location.href)
-      commentBox.setAttribute("data-numposts", 5)
-      commentBox.setAttribute("data-width", "")
-      document.querySelector(".comments").appendChild(commentBox)
-
-      window.FB.XFBML.parse()
+        this.loadComments()
     })
   },
-  name: "ArticleView"
+  name: "ArticleView",
+  methods: {
+    loadComments() {
+        let commentBox = document.createElement("div")
+
+        commentBox.setAttribute("class", "fb-comments")
+        commentBox.setAttribute("data-href", window.location.href)
+        commentBox.setAttribute("data-numposts", 5)
+        commentBox.setAttribute("data-width", "")
+        document.querySelector(".comments").appendChild(commentBox)
+
+        window.FB.XFBML.parse()
+    }
+  }
 }
 </script>
 
