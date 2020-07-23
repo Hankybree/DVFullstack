@@ -25,4 +25,3 @@ yarn-error.log*
 *.sqlite-journal
 uploads
 secret.js
-admin
