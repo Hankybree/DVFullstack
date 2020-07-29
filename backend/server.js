@@ -16,6 +16,7 @@ const sqlite3 = require('sqlite3')
 app.use(express.json())
 app.use(cors())
 app.use(helmet())
+app.use('/uploads', express.static('uploads'))
 
 app.listen(5000, () => {
     console.log('Listening on port 5000')

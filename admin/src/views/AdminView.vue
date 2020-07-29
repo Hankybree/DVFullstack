@@ -1,7 +1,15 @@
 <template>
     <div class="content">
         <div v-if="$store.state.loggedIn">
-            <Post></Post>
+            <input type="button" value="Skapa ny artikel" @click="openPostUI">
+            <input type="button" value="Redigera" @click="openEditUI">
+
+            <div v-if="$store.state.isPosting">
+                <Post></Post>
+            </div>
+            <div v-else>
+                <Edit></Edit>
+            </div>
         </div>
 
         <div v-else>
@@ -13,12 +21,22 @@
 <script>
 import LogIn from '../components/LogIn.vue'
 import Post from '../components/Post.vue'
+import Edit from '../components/Edit.vue'
 
 export default {
     name: 'AdminView',
     components: {
         LogIn,
-        Post
+        Post,
+        Edit
+    },
+    methods: {
+        openPostUI() {
+            this.$store.commit('setIsPosting', true)
+        },
+        openEditUI() {
+            this.$store.commit('setIsPosting', false)
+        }
     }
 }
 </script>

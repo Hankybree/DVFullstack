@@ -19,7 +19,8 @@ const store = new Vuex.Store({
     userName: '',
     password: '',
     loggedIn: false,
-    articleType: '',
+    isPosting: true,
+    articleType: 'article',
     articleImage: '',
     articleVideo: '',
     articleHeader: '',
@@ -36,6 +37,9 @@ const store = new Vuex.Store({
     },
     setLoggedIn(state, newLoggedIn) {
       state.loggedIn = newLoggedIn
+    },
+    setIsPosting(state, newIsPosting) {
+      state.isPosting = newIsPosting
     },
     setArticleType(state, newArticleType) {
       state.articleType = newArticleType

@@ -8,7 +8,6 @@ module.exports = function (app, database) {
     const multer = require('multer')
     const upload = multer({ dest: 'uploads/' })
     const fs = require('fs')
-    app.use('/uploads', express.static('uploads'))
 
     app.post('/artiklar', upload.single('articleImage'), (request, response) => {
 

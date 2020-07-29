@@ -1,10 +1,11 @@
 <template>
   <div id="app">
     <header>
-      <img src="./assets/logo.png" alt="Logo">
+      <img src="./assets/logo.png" alt="Logo" />
       <div id="spacer"></div>
       <div id="logout" v-if="$store.state.loggedIn">
-        <input type="button" value="Logga ut" @click="logout()">
+        {{ $store.state.userName }}
+        <input type="button" value="Logga ut" @click="logout()" />
       </div>
     </header>
     <router-view></router-view>
@@ -12,12 +13,11 @@
 </template>
 
 <script>
-
 export default {
-  name: 'App',
+  name: "App",
   methods: {
     logout() {
-      this.$store.commit('setLoggedIn', false)
+      this.$store.commit("setLoggedIn", false)
     }
   }
 }
@@ -58,6 +58,18 @@ header > img {
 #logout {
   margin: auto 10vw;
 }
+input[type="button"] {
+  width: 10vw;
+  margin: 8px auto;
+  border-radius: 1em;
+  border: solid 0.5px black;
+}
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
 #links {
   background-color: black;
   margin-top: 1em;
@@ -74,42 +86,5 @@ header > img {
 }
 .content {
   text-align: center;
-}
-
-/* Articles */
-.image {
-  margin-top: 15px;
-}
-.image,
-.text-content {
-  width: 80vw;
-}
-.video {
-  border: none;
-}
-.text-content {
-  display: inline-block;
-  text-align: left;
-  padding: 2.5vw;
-}
-.ingress {
-  font-weight: bold;
-}
-.meta {
-  display: flex;
-  font-size: 12px;
-  margin-bottom: 6px;
-  margin: auto;
-}
-.spacer {
-  flex-grow: 1;
-}
-.author {
-  text-align: left;
-  margin-left: 1vw;
-}
-.date {
-  text-align: right;
-  margin-right: 1vw;
 }
 </style>

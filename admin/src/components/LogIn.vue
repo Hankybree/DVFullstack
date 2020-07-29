@@ -33,10 +33,6 @@ export default {
         margin: auto;
         width: 30vw;
     }
-    input[type="button"] {
-        width: 10vw;
-        margin: 8px auto;
-    }
     input {
         border-radius: 1em;
     }
@@ -45,5 +41,14 @@ export default {
         margin: 2px;
         height: 3vh;
         padding: 5px;
+        border: solid 0.5px black;
+    }
+    @media (orientation: portrait) {
+        #form,
+        .type-div,
+        select,
+        input[type="button"] {
+            width: 95vw;
+        }
     }
 </style>

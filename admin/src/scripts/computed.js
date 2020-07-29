@@ -20,7 +20,7 @@ export const computed = {
             return this.$store.state.articleType
         },
         set(newArticleType) {
-            this.$store.commit('setPassword', newArticleType)
+            this.$store.commit('setArticleType', newArticleType)
         }
     },
     articleImage: {
@@ -28,7 +28,7 @@ export const computed = {
             return this.$store.state.articleImage
         },
         set(newArticleImage) {
-            this.$store.commit('setPassword', newArticleImage)
+            this.$store.commit('setArticleImage', newArticleImage)
         }
     },
     articleVideo: {
@@ -36,7 +36,7 @@ export const computed = {
             return this.$store.state.articleVideo
         },
         set(newArticleVideo) {
-            this.$store.commit('setPassword', newArticleVideo)
+            this.$store.commit('setArticleVideo', newArticleVideo)
         }
     },
     articleHeader: {
@@ -44,7 +44,7 @@ export const computed = {
             return this.$store.state.articleHeader
         },
         set(newArticleHeader) {
-            this.$store.commit('setPassword', newArticleHeader)
+            this.$store.commit('setArticleHeader', newArticleHeader)
         }
     },
     articleIngress: {
@@ -52,7 +52,7 @@ export const computed = {
             return this.$store.state.articleIngress
         },
         set(newArticleIngress) {
-            this.$store.commit('setPassword', newArticleIngress)
+            this.$store.commit('setArticleIngress', newArticleIngress)
         }
     },
     articleBody: {
@@ -60,7 +60,7 @@ export const computed = {
             return this.$store.state.articleBody
         },
         set(newArticleBody) {
-            this.$store.commit('setPassword', newArticleBody)
+            this.$store.commit('setArticleBody', newArticleBody)
         }
     },
     articleAuthor: {
@@ -68,7 +68,7 @@ export const computed = {
             return this.$store.state.articleAuthor
         },
         set(newArticleAuthor) {
-            this.$store.commit('setPassword', newArticleAuthor)
+            this.$store.commit('setArticleAuthor', newArticleAuthor)
         }
     },
 }
