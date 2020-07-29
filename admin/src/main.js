@@ -3,6 +3,8 @@ import App from './App.vue'
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 
+import { actions } from './scripts/actions.js'
+
 import AdminView from './views/AdminView.vue'
 
 Vue.use(VueRouter)
@@ -20,6 +22,7 @@ const store = new Vuex.Store({
     password: '',
     loggedIn: false,
     isPosting: true,
+    articles: [],
     articleType: 'article',
     articleImage: '',
     articleVideo: '',
@@ -40,6 +43,9 @@ const store = new Vuex.Store({
     },
     setIsPosting(state, newIsPosting) {
       state.isPosting = newIsPosting
+    },
+    setArticles(state, newArticles) {
+      state.articles = newArticles
     },
     setArticleType(state, newArticleType) {
       state.articleType = newArticleType
@@ -62,7 +68,8 @@ const store = new Vuex.Store({
     setArticleAuthor(state, newArticleAuthor) {
       state.articleAuthor = newArticleAuthor
     },
-  }
+  },
+  actions: actions
 })
 
 Vue.config.productionTip = false
