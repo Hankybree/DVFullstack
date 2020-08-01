@@ -32,6 +32,7 @@ export default {
     },
     methods: {
         openPostUI() {
+            this.$store.dispatch('defaultArticleData')
             this.$store.commit('setIsPosting', true)
         },
         openEditUI() {

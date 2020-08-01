@@ -23,6 +23,7 @@ const store = new Vuex.Store({
     loggedIn: false,
     isPosting: true,
     articles: [],
+    articleId: -1,
     articleType: 'article',
     articleImage: '',
     articleVideo: '',
@@ -46,6 +47,9 @@ const store = new Vuex.Store({
     },
     setArticles(state, newArticles) {
       state.articles = newArticles
+    },
+    setArticleId(state, newArticleId) {
+      state.articleId = newArticleId
     },
     setArticleType(state, newArticleType) {
       state.articleType = newArticleType
