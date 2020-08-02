@@ -5,19 +5,19 @@
                 <option value="article">Artikel</option>
                 <option value="video">Video</option>
             </select>
-            <input type="text" v-model="articleHeader" placeholder="Rubrik...">
+            <input type="text" v-model="articleHeader" placeholder="Rubrik..." required>
             <div class="type-div" v-if="articleType === 'video'">
-                <input type="text" v-model="articleVideo" placeholder="Youtube ID...">
+                <input type="text" v-model="articleVideo" placeholder="Youtube ID..." required>
             </div>
             <div class="type-div" v-if="articleType === 'article'">
                 <div id="image-div">
                     Välj en Bild
-                    <input name="articleImage" placeholder="Välj bild" type="file" accept="image/x-png, image/gif, image/jpeg">
+                    <input id="article-image" name="articleImage" placeholder="Välj bild" type="file" accept="image/x-png, image/gif, image/jpeg" required>
                 </div>
-                <textarea v-model="articleIngress" cols="30" rows="5" placeholder="Ingress"></textarea>
-                <textarea v-model="articleBody" cols="30" rows="10" placeholder="Brödtext"></textarea>
+                <textarea v-model="articleIngress" cols="30" rows="5" placeholder="Ingress" required></textarea>
+                <textarea v-model="articleBody" cols="30" rows="10" placeholder="Brödtext" required></textarea>
             </div>
-            <input type="button" value="Publicera" @click="publish()">
+            <input type="button" value="Publicera" @click="$store.dispatch('postArticle')">
         </div>
     </div>
 </template>
@@ -29,8 +29,8 @@ export default {
     name: 'Post',
     computed: computed,
     methods: {
-        publish() {
-            console.log(this.articleVideo)
+        print() {
+            console.log('Ingress ' + this.articleIngress + ' body ' + this.articleBody)
         }
     }
 }

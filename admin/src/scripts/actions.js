@@ -30,7 +30,37 @@ export const actions = {
         context.commit('setArticleAuthor', context.state.userName)
     },
     postArticle(context) {
-        console.log(context)
+
+        // Create form data
+        let formData = new FormData()
+
+        formData.append('articleType', context.state.articleType)
+        formData.append('articleHeader', context.state.articleHeader)
+
+        if (context.state.articleType === 'article') {
+
+            formData.append('articleImage', document.querySelector('#article-image').files[0])
+            formData.append('articleIngress', context.state.articleIngress)
+            formData.append('articleBody', context.state.articleBody)
+
+        } else {
+            formData.append('articleVideo', context.state.articleVideo)
+        }
+        
+        formData.append('articleAuthor', context.state.articleAuthor)
+
+        // Send post request
+        fetch('http://localhost:5000/artiklar', {
+            body: formData,
+            headers: {
+                'Token': localStorage.getItem('token')
+            },
+            method: 'POST'
+        }).then(response => response.json())
+        .then(result => {
+            alert(result.message)
+            context.dispatch('defaultArticleData')
+        })
     },
     patchArticle(context) {
         console.log(context)
@@ -54,6 +84,7 @@ export const actions = {
             if (result.status === 1) {
                 localStorage.setItem('token', result.token)
                 context.commit('setLoggedIn', true)
+                context.commit('setArticleAuthor', context.state.userName)
             }
 
             alert(result.message)
