@@ -2,7 +2,7 @@
   <div class="content">
     <div id="article" v-if="$store.state.article !== null">
       <div v-if="$store.state.article.articleType === 'article'">
-        <img class="image" :src="$store.state.article.img" :alt="$store.state.article.articleImage" />
+        <img class="image" :src="$store.state.article.articleImage" :alt="$store.state.article.articleImage" />
         <h1>{{ $store.state.article.articleHeader }}</h1>
         <div class="text-content">
           <p>{{ $store.state.article.articleIngress }}</p>
@@ -26,7 +26,7 @@
 <script>
 export default {
   beforeCreate() {
-    this.$store.dispatch("fetchSingleArticle", this.$route.params.artikel);
+    this.$store.dispatch("fetchSingleArticle", this.$route.params.artikel)
   },
   mounted() {
     this.$nextTick(() => {

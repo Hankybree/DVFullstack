@@ -4,8 +4,7 @@
     <div class="articles" v-for="(article, index) in $store.state.articles" :key="index">
       <div v-if="article.articleType === 'article'">
         <div>
-          <!-- <img class="image" :src="article.articleImage" :alt="article.articleImage"> -->
-          <img class="image" src="../assets/images/logo.png" :alt="article.articleImage">
+          <img class="image" :src="article.articleImage" :alt="article.articleImage">
         </div>
         <div class="text-content">
           <router-link
@@ -16,7 +15,7 @@
           <p class="body">{{ article.articleBody }}</p>
         </div>
       </div>
-      <div v-else>
+      <div id="video-div" v-else>
         <router-link
             class="header-link"
             :to="article.articleId.toString()"
@@ -60,6 +59,9 @@ export default {
 .text-content {
   width: 50vw;
 }
+#video-div {
+  margin-top: 10px;
+}
 .header-link {
   color: #2c3e50;
   text-decoration: none;
@@ -82,10 +84,13 @@ export default {
 }
 @media (orientation: portrait) {
   .video,
-  .articles,
-  .image {
+  .articles {
     width: 90vw;
     margin: 0;
+  }
+  .image {
+    width: 85vw;
+    margin-top: 10px;
   }
   .text-content {
     width: 85vw;

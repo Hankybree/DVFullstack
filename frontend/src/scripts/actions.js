@@ -10,7 +10,14 @@ export const actions = {
         if (result.status === 2) {
           alert(result.message)
         } else {
-          context.commit('setArticles', result)
+
+          let articles = []
+
+          for(let i = result.length - 1; i >= 0; i--) {
+            articles.push(result[i])
+          }
+
+          context.commit('setArticles', articles)
           console.log("Fetch done!")
         }
       })
