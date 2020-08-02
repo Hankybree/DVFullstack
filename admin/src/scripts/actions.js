@@ -70,7 +70,9 @@ export const actions = {
 
             if (result.status === 1) {
                 localStorage.removeItem('token')
-                context.commit("setLoggedIn", false)
+                context.commit('setLoggedIn', false)
+                context.commit('setUserName', '')
+                context.commit('setPassword', '')
             }
             
             alert(result.message)

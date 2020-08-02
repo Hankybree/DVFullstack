@@ -53,7 +53,8 @@ header > img {
 #logout {
   margin: auto 10vw;
 }
-input[type="button"] {
+input[type="button"],
+input[type="submit"] {
   width: 10vw;
   margin: 8px auto;
   border-radius: 1em;

@@ -1,10 +1,10 @@
 <template>
     <div class="content">
-        <div id="form">
+        <form id="form">
             <input v-model="userName" type="text" placeholder="Användarnamn...">
             <input v-model="password" type="password" placeholder="Lösenord...">
-            <input type="button" value="Logga in" @click="$store.dispatch('login')">
-        </div>
+            <input type="submit" value="Logga in" @click.prevent="$store.dispatch('login')">
+        </form>
     </div>
 </template>
 
@@ -41,7 +41,7 @@ export default {
         #form,
         .type-div,
         select,
-        input[type="button"] {
+        input[type="submit"] {
             width: 95vw;
         }
     }
