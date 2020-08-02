@@ -3,7 +3,7 @@
         <div id="form">
             <input v-model="userName" type="text" placeholder="Användarnamn...">
             <input v-model="password" type="password" placeholder="Lösenord...">
-            <input type="button" value="Logga in" @click="login()">
+            <input type="button" value="Logga in" @click="$store.dispatch('login')">
         </div>
     </div>
 </template>
@@ -12,13 +12,7 @@
 import { computed } from '../scripts/computed.js'
 export default {
     name: 'LogIn',
-    computed: computed,
-    methods: {
-        login() {
-            console.log('Username: ' + this.userName + ' and password: ' + this.password)
-            this.$store.commit('setLoggedIn', true)
-        }
-    }
+    computed: computed
 }
 </script>
 

@@ -5,7 +5,7 @@
       <div id="spacer"></div>
       <div id="logout" v-if="$store.state.loggedIn">
         {{ $store.state.userName }}
-        <input type="button" value="Logga ut" @click="logout()" />
+        <input type="button" value="Logga ut" @click="$store.dispatch('logout')" />
       </div>
     </header>
     <router-view></router-view>
@@ -14,12 +14,7 @@
 
 <script>
 export default {
-  name: "App",
-  methods: {
-    logout() {
-      this.$store.commit("setLoggedIn", false)
-    }
-  }
+  name: 'App'
 }
 </script>
 

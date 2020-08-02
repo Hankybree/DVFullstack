@@ -15,6 +15,14 @@ export const computed = {
             this.$store.commit('setPassword', newPassword)
         }
     },
+    articleId: {
+        get() {
+            return this.$store.state.articleId
+        },
+        set(newArticleId) {
+            this.$store.commit('setArticleId', newArticleId)
+        }
+    },
     articleType: {
         get() {
             return this.$store.state.articleType

@@ -1,8 +1,8 @@
 <template>
     <div class="content">
         <div v-if="$store.state.loggedIn">
-            <input type="button" value="Skapa ny artikel" @click="openPostUI">
-            <input type="button" value="Redigera" @click="openEditUI">
+            <input class="toggle-ui-button" type="button" value="Skapa ny artikel" @click="openPostUI">
+            <input class="toggle-ui-button" type="button" value="Redigera" @click="openEditUI">
 
             <div v-if="$store.state.isPosting">
                 <Post></Post>
@@ -43,5 +43,7 @@ export default {
 </script>
 
 <style scoped>
-
+    .toggle-ui-button {
+        margin: 5px;
+    }
 </style>

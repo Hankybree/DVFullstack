@@ -1,10 +1,6 @@
 <template>
     <div class="content">
-        <div id="form">
-            <select v-model="articleType">
-                <option value="article">Artikel</option>
-                <option value="video">Video</option>
-            </select>
+        <div id="form" v-if="articleId !== -1">
             <input type="text" v-model="articleHeader" placeholder="Rubrik...">
             <div class="type-div" v-if="articleType === 'video'">
                 <input type="text" v-model="articleVideo" placeholder="Youtube ID...">
@@ -16,6 +12,9 @@
                 </div>
                 <textarea v-model="articleIngress" cols="30" rows="5" placeholder="Ingress"></textarea>
                 <textarea v-model="articleBody" cols="30" rows="10" placeholder="Brödtext"></textarea>
+            </div>
+            <div>
+                Skriven av: {{ articleAuthor }}
             </div>
             <input type="button" value="Publicera ändringar" @click="update()">
             <input type="button" value="Radera" @click="deleteArticle()">
@@ -31,10 +30,10 @@ export default {
     computed: computed,
     methods: {
         update() {
-            console.log(this.articleVideo)
+            console.log('Updating article ' + this.articleId)
         },
         deleteArticle() {
-            console.log('Radera skiten')
+            console.log('Deleting article ' + this.articleId)
         }
     }
 }
@@ -43,7 +42,7 @@ export default {
 <style scoped>
     .content {
         display: flex;
-        min-height: 70vh;
+        min-height: 65vh;
     }
     #form,
     .type-div {

@@ -42,6 +42,6 @@ export default {
 }
 #chosen-article {
     width: 70vw;
-    background-color: red;
+    border-left: solid 0.5px black;
 }
 </style>
