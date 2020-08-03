@@ -55,6 +55,7 @@ export default {
   width: 50vw;
   margin: auto;
 }
+.image,
 .text-content {
   width: 50vw;
 }
@@ -76,6 +77,7 @@ export default {
   #article {
     width: 95vw;
   }
+  .image,
   .text-content,
   .video {
     width: 90vw;
