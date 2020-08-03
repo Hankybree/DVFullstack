@@ -5,17 +5,17 @@
                 <option value="article">Artikel</option>
                 <option value="video">Video</option>
             </select>
-            <input type="text" v-model="articleHeader" placeholder="Rubrik..." required>
+            <input type="text" v-model="articleHeader" placeholder="Rubrik...">
             <div class="type-div" v-if="articleType === 'video'">
-                <input type="text" v-model="articleVideo" placeholder="Youtube ID..." required>
+                <input type="text" v-model="articleVideo" placeholder="Youtube ID...">
             </div>
             <div class="type-div" v-if="articleType === 'article'">
                 <div id="image-div">
-                    Välj en Bild
-                    <input id="article-image" name="articleImage" placeholder="Välj bild" type="file" accept="image/x-png, image/gif, image/jpeg" required>
+                    <img id="thumbnail" :src="url" alt="Välj en bild">
+                    <input id="article-image" @change="loadThumbnail" name="articleImage" placeholder="Välj bild" type="file" accept="image/x-png, image/gif, image/jpeg">
                 </div>
-                <textarea v-model="articleIngress" cols="30" rows="5" placeholder="Ingress" required></textarea>
-                <textarea v-model="articleBody" cols="30" rows="10" placeholder="Brödtext" required></textarea>
+                <textarea v-model="articleIngress" cols="30" rows="5" placeholder="Ingress"></textarea>
+                <textarea v-model="articleBody" cols="30" rows="10" placeholder="Brödtext"></textarea>
             </div>
             <input type="button" value="Publicera" @click="$store.dispatch('postArticle')">
         </div>
@@ -28,9 +28,18 @@ import { computed } from '../scripts/computed.js'
 export default {
     name: 'Post',
     computed: computed,
+    data() {
+        return {
+            url: null
+        }
+    },
     methods: {
-        print() {
-            console.log('Ingress ' + this.articleIngress + ' body ' + this.articleBody)
+        print(input) {
+            console.log(input)
+        },
+        loadThumbnail(e) {
+            const file = e.target.files[0];
+            this.url = URL.createObjectURL(file);
         }
     }
 }
@@ -76,6 +85,10 @@ export default {
         display: flex;
         flex-direction: column;
     }
+    #thumbnail {
+        width: 27vw;
+        margin: auto;
+    }
     input[type="file"] {
         margin: auto;
     }
@@ -88,6 +101,9 @@ export default {
         select,
         input[type="button"] {
             width: 95vw;
+        }
+        #thumbnail {
+            width: 90vw;
         }
     }
 </style>
