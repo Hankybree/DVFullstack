@@ -66,7 +66,16 @@ export const actions = {
         console.log(context)
     },
     deleteArticle(context) {
-        console.log(context)
+        fetch('http://localhost:5000/artiklar/' + context.state.articleId, {
+            headers: {
+                'Token': localStorage.getItem('token')
+            },
+            method: 'DELETE'
+        }).then(response => response.json())
+        .then(result => {
+            alert(result.message)
+            window.location.reload()
+        })
     },
     login(context) {
         fetch('http://localhost:5000/login', {

@@ -16,9 +16,9 @@ module.exports = function(app, database) {
             })
     })
     
-    app.get('/artiklar/:artikel', (request, response) => {
+    app.get('/artiklar/:id', (request, response) => {
     
-        database.all('SELECT * FROM articles WHERE articleId=?', [request.params.artikel])
+        database.all('SELECT * FROM articles WHERE articleId=?', [request.params.id])
             .then((articles) => {
                 response.send(articles[0])
             })

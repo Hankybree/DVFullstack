@@ -17,7 +17,7 @@
                 Skriven av: {{ articleAuthor }}
             </div>
             <input type="button" value="Publicera ändringar" @click="update()">
-            <input type="button" value="Radera" @click="deleteArticle()">
+            <input type="button" value="Radera" @click="$store.dispatch('deleteArticle')">
         </div>
     </div>
 </template>
@@ -39,9 +39,6 @@ export default {
     methods: {
         update() {
             console.log('Updating article ' + this.articleId)
-        },
-        deleteArticle() {
-            console.log('Deleting article ' + this.articleId)
         },
         loadThumbnail(e) {
             const file = e.target.files[0];

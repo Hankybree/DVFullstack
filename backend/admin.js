@@ -61,8 +61,36 @@ module.exports = function (app, database) {
 
     })
 
-    app.delete('artiklar/:id', (request, response) => {
+    app.delete('/artiklar/:id', (request, response) => {
+        console.log('Called')
+        authenticate(request.get('Token'))
+            .then((user) => {
+                if (user !== -1) {
+                    database.all('SELECT * FROM articles WHERE articleId=?', [request.params.id])
+                        .then((articles) => {
 
+                            database.run('DELETE FROM articles WHERE articleId=?', [request.params.id])
+                                .then(() => {
+
+                                    if (articles[0].articleImage !== undefined && articles[0].articleImage !== null) {
+
+                                        const imgUrl = articles[0].articleImage.replace('http://localhost:5000/', '')
+
+                                        fs.unlink(imgUrl, () => {
+                                            console.log('File deleted')
+                                        })
+                                    }
+
+                                    response.send(JSON.stringify({ message: 'Article deleted', status: 1 }))
+
+                                }).catch(error => {
+                                    response.send(error)
+                                })
+                        })
+                } else {
+                    response.send(JSON.stringify({ message: 'Unauthorized', status: 2 }))
+                }
+            })
     })
 
     app.post('/login', (request, response) => {
