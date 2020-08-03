@@ -14,6 +14,11 @@
 
 <script>
 export default {
+  created() {
+    if (localStorage.getItem('token')) {
+      this.$store.dispatch('getSession')
+    }
+  },
   name: 'App'
 }
 </script>

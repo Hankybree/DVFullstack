@@ -117,5 +117,21 @@ export const actions = {
             
             alert(result.message)
         })
+    },
+    getSession(context) {
+        fetch('http://localhost:5000/session', {
+            headers: {
+                'Token': localStorage.getItem('token')
+            }
+        })
+            .then(response => response.json())
+            .then(result => {
+                if (result.status === 1) {
+                    context.commit('setLoggedIn', true)
+                    context.commit('setArticleAuthor', result.userName)
+                } else {
+                    alert(result.message)
+                }
+            })
     }
 }

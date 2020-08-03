@@ -111,10 +111,12 @@ module.exports = function (app, database) {
 
                                 const token = uuidv4()
                                 const userId = users[0].userId
+                                const userName = users[0].userName
 
-                                database.run('INSERT INTO sessions (sessionUserId, sessionToken) VALUES (?, ?)',
+                                database.run('INSERT INTO sessions (sessionUserId, sessionUserName, sessionToken) VALUES (?, ?, ?)',
                                     [
                                         userId,
+                                        userName,
                                         token
                                     ]).then(() => {
                                         response.send(JSON.stringify({ user: userId, token: token, message: 'Logged in', status: 1 }))
@@ -141,6 +143,20 @@ module.exports = function (app, database) {
         } else {
             response.send(JSON.stringify({ message: 'You are not logged in', status: 2 }))
         }
+    })
+
+    app.get('/session', (request, response) => {
+        authenticate(request.get('Token'))
+            .then((user) => {
+                if (user !== -1) {
+                    database.all('SELECT * FROM sessions WHERE sessionUserId=?', [user])
+                        .then((sessions) => {
+                            response.send(JSON.stringify({ userName: sessions[0].sessionUserName, status: 1 }))
+                        })
+                } else {
+                    response.send(JSON.stringify({ message: 'Unauthorized', status: 2 }))
+                }
+            })
     })
 
     function authenticate(token) {
