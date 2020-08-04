@@ -1,5 +1,5 @@
 <template>
-    <div class="content">
+    <div class="content" v-if="$store.state.loggedIn">
         <div id="form">
             <select v-model="articleType">
                 <option value="article">Artikel</option>
@@ -26,7 +26,7 @@
 import { computed } from '../scripts/computed.js'
 
 export default {
-    name: 'Post',
+    name: 'PostView',
     computed: computed,
     data() {
         return {

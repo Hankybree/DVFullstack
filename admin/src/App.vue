@@ -8,6 +8,10 @@
         <input type="button" value="Logga ut" @click="$store.dispatch('logout')" />
       </div>
     </header>
+    <nav id="links" v-if="$store.state.loggedIn">
+      <router-link to="/publicera">Ny artikel</router-link>
+      <router-link to="/redigera">Redigera artiklar</router-link>   
+    </nav>
     <router-view></router-view>
   </div>
 </template>
@@ -43,7 +47,7 @@ header {
   background-color: pink;
   padding-top: 1em;
   height: 22vh;
-  border-bottom: solid 3vh black;
+  /* border-bottom: solid 3vh black; */
   display: flex;
   flex-direction: row;
 }
@@ -73,7 +77,7 @@ button:focus {
 }
 #links {
   background-color: black;
-  margin-top: 1em;
+  margin-top: 0;
   display: flex;
   height: 3vh;
 }
@@ -87,5 +91,9 @@ button:focus {
 }
 .content {
   text-align: center;
+}
+@font-face {
+  font-family: 'bangers';
+  src: url('./assets/fonts/bangers.ttf');
 }
 </style>

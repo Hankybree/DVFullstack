@@ -1,5 +1,5 @@
 <template>
-    <div class="content">
+    <div class="content" v-if="$store.state.loggedIn">
         <div id="articles">
             <div :key="index" v-for="(article, index) in $store.state.articles">
                 <p @click="focusArticle(article.articleId)">
@@ -14,13 +14,13 @@
 </template>
 
 <script>
-import ChosenArticle from './ChosenArticle.vue'
+import ChosenArticle from '../components/ChosenArticle.vue'
 
 export default {
     beforeCreate() {
         this.$store.dispatch('getArticles')
     },
-    name: 'Edit',
+    name: 'EditView',
     components: {
         ChosenArticle
     },

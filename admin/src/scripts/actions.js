@@ -12,11 +12,16 @@ export const actions = {
             .then(result => {
                 context.commit('setArticleType', result.articleType)
                 context.commit('setArticleImage', result.articleImage)
-                context.commit('setArticleVideo', result.articleVideo)
+                if (result.articleVideo !== null) {
+                const videoId = result.articleVideo.replace('https://www.youtube.com/embed/', '')
+                context.commit('setArticleVideo', videoId)
+                }
                 context.commit('setArticleHeader', result.articleHeader)
                 context.commit('setArticleIngress', result.articleIngress)
                 context.commit('setArticleBody', result.articleBody)
                 context.commit('setArticleAuthor', result.articleAuthor)
+
+                context.commit('setImageUrl', result.articleImage)
             })
     },
     defaultArticleData(context) {
@@ -97,6 +102,7 @@ export const actions = {
             }
 
             alert(result.message)
+            window.location.replace('http://localhost:8080/#/publicera')
         })
     },
     logout(context) {
@@ -116,6 +122,7 @@ export const actions = {
             }
             
             alert(result.message)
+            window.location.replace('http://localhost:8080/#/')
         })
     },
     getSession(context) {

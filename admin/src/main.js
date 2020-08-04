@@ -5,14 +5,18 @@ import Vuex from 'vuex'
 
 import { actions } from './scripts/actions.js'
 
-import AdminView from './views/AdminView.vue'
+import LogInView from './views/LogInView.vue'
+import PostView from './views/PostView.vue'
+import EditView from './views/EditView.vue'
 
 Vue.use(VueRouter)
 Vue.use(Vuex)
 
 const router = new VueRouter({
   routes: [
-    { component: AdminView, path: '/' }
+    { component: LogInView, path: '/' },
+    { component: PostView, path: '/publicera' },
+    { component: EditView, path: '/redigera' }
   ]
 })
 
@@ -21,7 +25,7 @@ const store = new Vuex.Store({
     userName: '',
     password: '',
     loggedIn: false,
-    isPosting: true,
+    imageUrl: null,
     articles: [],
     articleId: -1,
     articleType: 'article',
@@ -44,6 +48,9 @@ const store = new Vuex.Store({
     },
     setIsPosting(state, newIsPosting) {
       state.isPosting = newIsPosting
+    },
+    setImageUrl(state, newImageUrl) {
+      state.imageUrl = newImageUrl
     },
     setArticles(state, newArticles) {
       state.articles = newArticles

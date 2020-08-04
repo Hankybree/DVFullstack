@@ -7,7 +7,7 @@
             </div>
             <div class="type-div" v-if="articleType === 'article'">
                 <div id="image-div">
-                    <img id="thumbnail" :src="url" alt="Välj en bild">
+                    <img id="thumbnail" :src="$store.state.imageUrl" alt="Välj en bild">
                     <input name="articleImage" placeholder="Välj bild" type="file" accept="image/x-png, image/gif, image/jpeg" @change="loadThumbnail">
                 </div>
                 <textarea v-model="articleIngress" cols="30" rows="5" placeholder="Ingress"></textarea>
@@ -26,23 +26,15 @@
 import { computed } from '../scripts/computed.js'
 
 export default {
-    created() {
-        this.url = this.articleImage
-    },
     name: 'ChosenArticle',
-    data() {
-        return {
-            url: null
-        }
-    },
     computed: computed,
     methods: {
         update() {
             console.log('Updating article ' + this.articleId)
         },
         loadThumbnail(e) {
-            const file = e.target.files[0];
-            this.url = URL.createObjectURL(file);
+            const file = e.target.files[0]
+            this.$store.commit('setImageUrl', URL.createObjectURL(file))
         }
     }
 }
@@ -51,7 +43,8 @@ export default {
 <style scoped>
     .content {
         display: flex;
-        min-height: 65vh;
+        min-height: 75vh;
+        padding-top: 20px;
     }
     #form,
     .type-div {
