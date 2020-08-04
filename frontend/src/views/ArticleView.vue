@@ -5,13 +5,13 @@
         <img class="image" :src="$store.state.article.articleImage" :alt="$store.state.article.articleImage" />
         <h1>{{ $store.state.article.articleHeader }}</h1>
         <div class="text-content">
-          <p>{{ $store.state.article.articleIngress }}</p>
+          <p class="ingress">{{ $store.state.article.articleIngress }}</p>
           <p>{{ $store.state.article.articleBody }}</p>
         </div>
       </div>
       <div v-else>
         <h1>{{ $store.state.article.articleHeader }}</h1>
-        <iframe class="video" :src="$store.state.article.articleVideo"></iframe>
+        <iframe class="video" allowfullscreen="true" :src="$store.state.article.articleVideo"></iframe>
       </div>
       <div class="meta">
         <div class="author">{{ $store.state.article.articleAuthor }}</div>

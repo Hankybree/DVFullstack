@@ -21,7 +21,7 @@
             :to="article.articleId.toString()"
           >{{ article.articleHeader }}</router-link>
         <div>
-          <iframe class="video" :src="article.articleVideo"></iframe>
+          <iframe class="video" allowfullscreen="true" :src="article.articleVideo"></iframe>
         </div>
       </div>
       <div class="meta">
