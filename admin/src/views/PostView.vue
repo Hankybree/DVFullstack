@@ -12,7 +12,7 @@
             <div class="type-div" v-if="articleType === 'article'">
                 <div id="image-div">
                     <img id="thumbnail" :src="url" alt="Välj en bild">
-                    <input id="article-image" @change="loadThumbnail" name="articleImage" placeholder="Välj bild" type="file" accept="image/x-png, image/gif, image/jpeg">
+                    <input id="article-image-post" name="articleImage" placeholder="Välj bild" type="file" accept="image/x-png, image/gif, image/jpeg" @change="loadThumbnail">
                 </div>
                 <textarea v-model="articleIngress" cols="30" rows="5" placeholder="Ingress"></textarea>
                 <textarea v-model="articleBody" cols="30" rows="10" placeholder="Brödtext"></textarea>
@@ -26,6 +26,9 @@
 import { computed } from '../scripts/computed.js'
 
 export default {
+    created() {
+        this.$store.dispatch('defaultArticleData')
+    },
     name: 'PostView',
     computed: computed,
     data() {

@@ -28,15 +28,43 @@ module.exports = function (app, database) {
                     let body = null
                     let videoUrl = null
 
+                    let articleAttributes = {}
+
                     if (request.body.articleType === 'article') {
+
+                        if (request.file === undefined) {
+                            response.send(JSON.stringify({ message: 'You must fill out the entire form', status: 3 }))
+                            return
+                        }
+
+                        articleAttributes = {
+                            articleHeader: request.body.articleHeader,
+                            articleImage: request.file.path,
+                            articleIngress: request.body.articleIngress,
+                            articleBody: request.body.articleBody
+                        }
+
                         imagePath = 'http://localhost:5000/' + request.file.path
                         ingress = request.body.articleIngress
                         body = request.body.articleBody
                     } else {
+
+                        articleAttributes = {
+                            articleHeader: request.body.articleHeader,
+                            articleVideo: request.body.articleVideo
+                        }
+
                         videoUrl = 'https://www.youtube.com/embed/' + request.body.articleVideo
                     }
 
-                    database.run('INSERT INTO articles (articleType, articleImage, articleVideo, articleHeader, articleIngress, articleBody, articleAuthor, articleDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+                    for (let key in articleAttributes) {
+                        if(articleAttributes[key] === null || articleAttributes[key] === '' || articleAttributes[key] === undefined) {
+                            response.send(JSON.stringify({ message: 'You must fill out the entire form', status: 3 }))
+                            return
+                        }
+                    }
+
+                    database.run('INSERT INTO articles (articleType, articleImage, articleVideo, articleHeader, articleIngress, articleBody, articleAuthor, articleDate, articleUpdatedTime, articleUpdatedBy) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
                         [
                             request.body.articleType,
                             imagePath,
@@ -45,7 +73,9 @@ module.exports = function (app, database) {
                             ingress,
                             body,
                             request.body.articleAuthor,
-                            moment().format('YYYY-MM-DD')
+                            moment().format('YYYY-MM-DD'),
+                            null,
+                            null
                         ]).then(() => {
                             response.status(201).send(JSON.stringify({ message: 'Article published', status: 1 }))
                         }).catch((error) => {
@@ -57,12 +87,70 @@ module.exports = function (app, database) {
             })
     })
 
-    app.patch('/artiklar/:id', (request, response) => {
+    app.patch('/artiklar/:id', upload.single('articleImage'), (request, response) => {
 
+        authenticate(request.get('Token'))
+            .then((user) => {
+                if (user !== -1) {
+                    database.all('SELECT * FROM articles WHERE articleId=?', [request.params.id])
+                        .then((articles) => {
+                            let updatedArticle = {
+                                articleUpdatedTime: moment().format('YYYY-MM-DD')
+                            }
+                    
+                            if(request.file === undefined) {
+                                request.body['articleImage'] = ''
+                            } else {
+                                if (articles[0].articleImage !== undefined && articles[0].articleImage !== null) {
+
+                                    const imgUrl = articles[0].articleImage.replace('http://localhost:5000/', '')
+
+                                    fs.unlink(imgUrl, () => {
+                                        console.log('File deleted')
+                                    })
+                                }
+
+                                request.body['articleImage'] = 'http://localhost:5000/' + request.file.path
+                            }
+
+                            let videoUrl = null
+
+                            if (request.body['articleVideo']) {
+                                videoUrl = 'https://www.youtube.com/embed/' + request.body.articleVideo
+                            }
+                    
+                            for (let key in request.body) {
+                                if (request.body[key] !== null && request.body[key] !== undefined && request.body[key] !== '') {
+                                    updatedArticle[key] = request.body[key]
+                                }
+                            }
+                    
+                            const newArticle = Object.assign(articles[0], updatedArticle)
+
+                            database.run('UPDATE articles SET articleImage=?, articleVideo=?, articleHeader=?, articleIngress=?, articleBody=?, articleUpdatedTime=?, articleUpdatedBy=? WHERE articleId=?', 
+                            [
+                                newArticle.articleImage,
+                                videoUrl,
+                                newArticle.articleHeader,
+                                newArticle.articleIngress,
+                                newArticle.articleBody,
+                                newArticle.articleUpdatedTime,
+                                newArticle.articleUpdatedBy,
+                                request.params.id
+                            ]).then(() => {
+                                response.send(JSON.stringify({ message: 'Article updated', status: 1 }))
+                            }).catch((error) => {
+                                response.send(error)
+                            })
+                        })
+                } else {
+                    response.send(JSON.stringify({ message: 'Unauthorized', status: 2 }))
+                }
+            })
     })
 
     app.delete('/artiklar/:id', (request, response) => {
-        console.log('Called')
+        
         authenticate(request.get('Token'))
             .then((user) => {
                 if (user !== -1) {

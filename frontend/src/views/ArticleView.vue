@@ -14,9 +14,14 @@
         <iframe class="video" allowfullscreen="true" :src="$store.state.article.articleVideo"></iframe>
       </div>
       <div class="meta">
-        <div class="author">{{ $store.state.article.articleAuthor }}</div>
+        <div class="author">Publicerad:</div>
         <div class="spacer"></div>
-        <div class="date">{{ $store.state.article.articleDate }}</div>
+        <div class="date">{{ $store.state.article.articleDate }} av {{ $store.state.article.articleAuthor }}</div>
+      </div>
+      <div class="meta" v-if="$store.state.article.articleUpdatedTime">
+        <div class="author">Senast uppdaterad:</div>
+        <div class="spacer"></div>
+        <div class="date">{{ $store.state.article.articleUpdatedTime }} av {{ $store.state.article.articleUpdatedBy }} </div>
       </div>
     </div>
     <div class="comments"></div>

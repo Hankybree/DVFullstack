@@ -43,16 +43,16 @@ export const actions = {
         formData.append('articleHeader', context.state.articleHeader)
 
         if (context.state.articleType === 'article') {
-
-            formData.append('articleImage', document.querySelector('#article-image').files[0])
+            formData.append('articleImage', document.querySelector('#article-image-post').files[0])
             formData.append('articleIngress', context.state.articleIngress)
             formData.append('articleBody', context.state.articleBody)
-
         } else {
             formData.append('articleVideo', context.state.articleVideo)
         }
         
         formData.append('articleAuthor', context.state.articleAuthor)
+
+        console.log(formData)
 
         // Send post request
         fetch('http://localhost:5000/artiklar', {
@@ -64,11 +64,44 @@ export const actions = {
         }).then(response => response.json())
         .then(result => {
             alert(result.message)
-            context.dispatch('defaultArticleData')
+
+            if (result.status === 1) {
+                window.location.reload()
+            }
         })
     },
     patchArticle(context) {
-        console.log(context)
+
+        let formData = new FormData()
+
+        formData.append('articleType', context.state.articleType)
+        formData.append('articleHeader', context.state.articleHeader)
+
+        if (context.state.articleType === 'article') {
+            formData.append('articleImage', document.querySelector('#article-image-patch').files[0])
+            formData.append('articleIngress', context.state.articleIngress)
+            formData.append('articleBody', context.state.articleBody)
+        } else {
+            formData.append('articleVideo', context.state.articleVideo)
+        }
+        
+        formData.append('articleUpdatedBy', context.state.articleAuthor)
+
+        // Send patch request
+        fetch('http://localhost:5000/artiklar/' + context.state.articleId, {
+            body: formData,
+            headers: {
+                'Token': localStorage.getItem('token')
+            },
+            method: 'PATCH'
+        }).then(response => response.json())
+        .then(result => {
+            alert(result.message)
+
+            if (result.status === 1) {
+                window.location.reload()
+            }
+        })
     },
     deleteArticle(context) {
         fetch('http://localhost:5000/artiklar/' + context.state.articleId, {
@@ -134,6 +167,7 @@ export const actions = {
             .then(response => response.json())
             .then(result => {
                 if (result.status === 1) {
+                    context.commit('setUserName', result.userName)
                     context.commit('setLoggedIn', true)
                     context.commit('setArticleAuthor', result.userName)
                 } else {

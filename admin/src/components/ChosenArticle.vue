@@ -8,7 +8,7 @@
             <div class="type-div" v-if="articleType === 'article'">
                 <div id="image-div">
                     <img id="thumbnail" :src="$store.state.imageUrl" alt="Välj en bild">
-                    <input name="articleImage" placeholder="Välj bild" type="file" accept="image/x-png, image/gif, image/jpeg" @change="loadThumbnail">
+                    <input id="article-image-patch" name="articleImage" placeholder="Välj bild" type="file" accept="image/x-png, image/gif, image/jpeg" @change="loadThumbnail">
                 </div>
                 <textarea v-model="articleIngress" cols="30" rows="5" placeholder="Ingress"></textarea>
                 <textarea v-model="articleBody" cols="30" rows="10" placeholder="Brödtext"></textarea>
@@ -16,7 +16,7 @@
             <div>
                 Skriven av: {{ articleAuthor }}
             </div>
-            <input type="button" value="Publicera ändringar" @click="update()">
+            <input type="button" value="Publicera ändringar" @click="$store.dispatch('patchArticle')">
             <input type="button" value="Radera" @click="$store.dispatch('deleteArticle')">
         </div>
     </div>
@@ -29,9 +29,6 @@ export default {
     name: 'ChosenArticle',
     computed: computed,
     methods: {
-        update() {
-            console.log('Updating article ' + this.articleId)
-        },
         loadThumbnail(e) {
             const file = e.target.files[0]
             this.$store.commit('setImageUrl', URL.createObjectURL(file))

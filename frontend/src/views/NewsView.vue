@@ -25,9 +25,14 @@
         </div>
       </div>
       <div class="meta">
-        <div class="author">{{ article.articleAuthor }}</div>
+        <div class="author">Publicerad:</div>
         <div class="spacer"></div>
-        <div class="date">{{ article.articleDate }}</div>
+        <div class="date">{{ article.articleDate }} av {{ article.articleAuthor }}</div>
+      </div>
+      <div class="meta" v-if="article.articleUpdatedTime">
+        <div class="author">Senast uppdaterad:</div>
+        <div class="spacer"></div>
+        <div class="date">{{ article.articleUpdatedTime }} av {{ article.articleUpdatedBy }} </div>
       </div>
       <div class="divider" v-if="index !== $store.state.articles.length - 1"></div>
     </div>
