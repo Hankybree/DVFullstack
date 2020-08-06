@@ -44,7 +44,7 @@ module.exports = function (app, database) {
                             articleBody: request.body.articleBody
                         }
 
-                        imagePath = 'http://localhost:5000/' + request.file.path
+                        imagePath = 'http://dagensvibe.se:5000' + request.file.path
                         ingress = request.body.articleIngress
                         body = request.body.articleBody
                     } else {
@@ -103,14 +103,14 @@ module.exports = function (app, database) {
                             } else {
                                 if (articles[0].articleImage !== undefined && articles[0].articleImage !== null) {
 
-                                    const imgUrl = articles[0].articleImage.replace('http://localhost:5000/', '')
+                                    const imgUrl = articles[0].articleImage.replace('http://dagensvibe.se:5000', '')
 
                                     fs.unlink(imgUrl, () => {
                                         console.log('File deleted')
                                     })
                                 }
 
-                                request.body['articleImage'] = 'http://localhost:5000/' + request.file.path
+                                request.body['articleImage'] = 'http://dagensvibe.se:5000' + request.file.path
                             }
 
                             let videoUrl = null
@@ -162,7 +162,7 @@ module.exports = function (app, database) {
 
                                     if (articles[0].articleImage !== undefined && articles[0].articleImage !== null) {
 
-                                        const imgUrl = articles[0].articleImage.replace('http://localhost:5000/', '')
+                                        const imgUrl = articles[0].articleImage.replace('http://dagensvibe.se:5000', '')
 
                                         fs.unlink(imgUrl, () => {
                                             console.log('File deleted')

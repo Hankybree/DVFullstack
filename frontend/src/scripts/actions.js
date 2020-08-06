@@ -3,7 +3,7 @@ export const actions = {
 
     console.log("Fetching data...")
 
-    fetch("http://localhost:5000/artiklar/")
+    fetch("http://dagensvibe.se:5000/artiklar/")
       .then(response => response.json())
       .then(result => {
 
@@ -26,7 +26,7 @@ export const actions = {
 
     console.log('Fetching data...')
 
-    fetch('http://localhost:5000/artiklar/' + id)
+    fetch('http://dagensvibe.se:5000/artiklar/' + id)
       .then(response => response.json())
       .then(result => {
 
@@ -45,7 +45,7 @@ export const actions = {
     const body = document.querySelector('#mail-body')
 
     if (subject.checkValidity() && mail.checkValidity() && body.checkValidity()) {
-      fetch('http://localhost:5000/kontakta', {
+      fetch('http://dagensvibe.se:5000/kontakta', {
       body: JSON.stringify({
         subject: subject.value,
         mail: mail.value,

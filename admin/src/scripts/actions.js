@@ -1,13 +1,13 @@
 export const actions = {
     getArticles(context) {
-        fetch('http://localhost:5000/artiklar')
+        fetch('http://dagensvibe.se:5000/artiklar')
             .then(response => response.json())
             .then(result => {
                 context.commit('setArticles', result)
             })
     },
     getArticle(context) {
-        fetch('http://localhost:5000/artiklar/' + context.state.articleId)
+        fetch('http://dagensvibe.se:5000/artiklar/' + context.state.articleId)
             .then(response => response.json())
             .then(result => {
                 context.commit('setArticleType', result.articleType)
@@ -55,7 +55,7 @@ export const actions = {
         console.log(formData)
 
         // Send post request
-        fetch('http://localhost:5000/artiklar', {
+        fetch('http://dagensvibe.se:5000/artiklar', {
             body: formData,
             headers: {
                 'Token': localStorage.getItem('token')
@@ -88,7 +88,7 @@ export const actions = {
         formData.append('articleUpdatedBy', context.state.articleAuthor)
 
         // Send patch request
-        fetch('http://localhost:5000/artiklar/' + context.state.articleId, {
+        fetch('http://dagensvibe.se:5000/artiklar/' + context.state.articleId, {
             body: formData,
             headers: {
                 'Token': localStorage.getItem('token')
@@ -104,7 +104,7 @@ export const actions = {
         })
     },
     deleteArticle(context) {
-        fetch('http://localhost:5000/artiklar/' + context.state.articleId, {
+        fetch('http://dagensvibe.se:5000/artiklar/' + context.state.articleId, {
             headers: {
                 'Token': localStorage.getItem('token')
             },
@@ -116,7 +116,7 @@ export const actions = {
         })
     },
     login(context) {
-        fetch('http://localhost:5000/login', {
+        fetch('http://dagensvibe.se:5000/login', {
             body: JSON.stringify({
                 userName: context.state.userName,
                 userPassword: context.state.password
@@ -139,7 +139,7 @@ export const actions = {
         })
     },
     logout(context) {
-        fetch('http://localhost:5000/logout', {
+        fetch('http://dagensvibe.se:5000/logout', {
             headers: {
                 'Token': localStorage.getItem('token')
             },
@@ -159,7 +159,7 @@ export const actions = {
         })
     },
     getSession(context) {
-        fetch('http://localhost:5000/session', {
+        fetch('http://dagensvibe.se:5000/session', {
             headers: {
                 'Token': localStorage.getItem('token')
             }
